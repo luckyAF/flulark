@@ -18,6 +18,6 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    expect(await Flulark.platformVersion, '42');
+    expect(await Flulark.getPlatformVersion(), '42');
   });
 }

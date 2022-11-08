@@ -20,6 +20,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+    Flulark.init();
     super.initState();
     initPlatformState();
   }
@@ -31,7 +32,7 @@ class _MyAppState extends State<MyApp> {
     // We also handle the message potentially returning null.
     try {
       platformVersion =
-          await Flulark.platformVersion ?? 'Unknown platform version';
+          await Flulark.getPlatformVersion() ?? 'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -53,8 +54,22 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: Container(
+          child: Column(
+            children: [
+              Text('Running on: $_platformVersion\n'),
+              SizedBox(
+                height: 80,
+              ),
+              InkWell(
+                onTap: () async {
+                  Flulark.getLarkLoginCode(
+                      "cli_a2736319303bd00d", (code) => {});
+                },
+                child: Text("飞书登陆"),
+              )
+            ],
+          ),
         ),
       ),
     );
