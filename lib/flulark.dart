@@ -10,7 +10,8 @@ class Flulark {
   static FluLarkLoginCallBack? _fluLarkSuccessCallBack;
   static FluLarkLoginCallBack? _fluLarkErrorCallBack;
 
-  static void init() {
+  /// 初始化
+  static void init(String appId, String scheme) {
     if (_fluLarkChannel == null) {
       _fluLarkChannel = const MethodChannel(Constants.FLU_LARK_CHANNEL);
       _fluLarkChannel!.setMethodCallHandler((call) async {
@@ -29,16 +30,20 @@ class Flulark {
             break;
         }
       });
+      _fluLarkChannel?.invokeMethod(Constants.FLU_LARK_REGISTER, {
+        Constants.FLU_LARK_APP_ID: appId,
+        Constants.FLU_LARK_APP_SCHEME: scheme
+      });
     }
   }
 
   /// 获取飞书的登陆code
-  static void getLarkLoginCode(String appId, Function(String code) callback,
-      {Function(String code)? errorCallback}) {
+  static void getLarkLoginCode(Function(String code) callback,
+      {Function(String code)? errorCallback, bool? mode}) {
     _fluLarkSuccessCallBack = callback;
     _fluLarkErrorCallBack = errorCallback;
-    _fluLarkChannel?.invokeMethod(
-        Constants.FLU_LARK_LOGIN, {Constants.FLU_LARK_APP_ID: appId});
+    _fluLarkChannel?.invokeMethod(Constants.FLU_LARK_LOGIN,
+        {Constants.FLU_LARK_CHALLENGE_MODE: mode ?? true});
   }
 
   static Future<String?> getPlatformVersion() async {

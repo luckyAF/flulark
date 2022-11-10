@@ -17,7 +17,8 @@ flutter飞书登录
   s.dependency 'Flutter'
   s.dependency 'LarkSSO', '~> 1.1.6'
   s.platform = :ios, '9.0'
-  # Flutter.framework does not contain a i386 slice.
-  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
-  s.swift_version = '5.0'
+  s.swift_version = '5.7'
+  s.static_framework = true
+  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
+  s.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
 end

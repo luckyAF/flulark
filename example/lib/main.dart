@@ -20,7 +20,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    Flulark.init();
+    Flulark.init("cli_9f24d88a01bdd00d", "cli9f24d88a01bdd00d");
     super.initState();
     initPlatformState();
   }
@@ -63,8 +63,7 @@ class _MyAppState extends State<MyApp> {
               ),
               InkWell(
                 onTap: () async {
-                  Flulark.getLarkLoginCode(
-                      "cli_a2736319303bd00d", (code) => {});
+                  Flulark.getLarkLoginCode((code) => {});
                 },
                 child: Text("飞书登陆"),
               )

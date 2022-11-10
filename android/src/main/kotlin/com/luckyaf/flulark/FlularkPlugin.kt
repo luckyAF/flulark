@@ -28,6 +28,8 @@ class FlularkPlugin: FlutterPlugin, MethodCallHandler , ActivityAware,
 
   private lateinit var mContext: Context
 
+  private  var mAppId:String = ""
+
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, Constants.FLU_LARK_CHANNEL)
     channel.setMethodCallHandler(this)
@@ -39,15 +41,18 @@ class FlularkPlugin: FlutterPlugin, MethodCallHandler , ActivityAware,
       Constants.FLU_LARK_PLATFORM_VERSION->{
         result.success("Android ${android.os.Build.VERSION.RELEASE}")
       }
+      Constants.FLU_LARK_REGISTER ->{
+        mAppId = call.argument<String?>(Constants.FLU_LARK_APP_ID)?:""
+      }
       Constants.FLU_LARK_LOGIN -> {
-        val msg = call.argument<String>(Constants.FLU_LARK_APP_ID)
+        val mode = call.argument<Boolean?>(Constants.FLU_LARK_CHALLENGE_MODE)?:true
         val scopeList = ArrayList<String>()
         scopeList.add("contact:user.employee_id:readonly")
         scopeList.add("contact:user.id:readonly")
-        val builder = LarkSSO.Builder().setAppId(msg)
+        val builder = LarkSSO.Builder().setAppId(mAppId)
                 .setServer("Feishu")
                 .setLanguage("zh")
-                .setChallengeMode(true)
+                .setChallengeMode(mode)
                 .setScopeList(scopeList)
                 .setContext(mContext as Activity?)
         LarkSSO.inst().startSSOVerify(builder, object : IGetDataCallback {
