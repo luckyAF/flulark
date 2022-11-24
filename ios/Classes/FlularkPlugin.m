@@ -12,32 +12,16 @@
 
 @implementation FlularkPlugin;
 
-bool useChallengeCode = YES;
-/// channel
-FlutterMethodChannel *channel = nil;
-
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  #if TARGET_OS_IPHONE
-        if (channel == nil) {
-#endif
-        channel = [FlutterMethodChannel methodChannelWithName:@"com.luckyaf/flulark"
-                      binaryMessenger:[registrar messenger]];
-        FlularkPlugin *instance = [[FlularkPlugin alloc] initWithRegistrar:registrar methodChannel:channel];
-        [registrar addMethodCallDelegate:instance channel:channel];
-        [[FlularkResponseHandler defaultManager] setMethodChannel:channel];
-        [registrar addApplicationDelegate:instance];
-#if TARGET_OS_IPHONE
-        }
-#endif
 
-}
+FlutterMethodChannel* channel = [FlutterMethodChannel
+      methodChannelWithName:@"com.luckyaf/flulark"
+            binaryMessenger:[registrar messenger]];
+  FlularkPlugin* instance = [[FluauthPlugin alloc] init];
+  [registrar addMethodCallDelegate:instance channel:channel];
+          [[FlularkResponseHandler defaultManager] setMethodChannel:channel];
+          [registrar addApplicationDelegate:instance];
 
-- (instancetype)initWithRegistrar:(NSObject <FlutterPluginRegistrar> *)registrar methodChannel:(FlutterMethodChannel *)flutterMethodChannel {
-    self = [super init];
-    if (self) {
-        channel = flutterMethodChannel;
-    }
-    return self;
 }
 
 
@@ -89,7 +73,7 @@ FlutterMethodChannel *channel = nil;
   UIViewController *vc = UIApplication.sharedApplication.keyWindow.rootViewController;
      LKSSORequest *request = LKSSORequest.feishu;
     request.scope = @[@"contact:user.id:readonly"];
-    request.useChallengeCode = useChallengeCode; // 挑战码模式
+    request.useChallengeCode = YES; // 挑战码模式
     [LarkSSO sendWithRequest:request viewController:vc delegate:[FlularkResponseHandler defaultManager]];     
      result(@YES);       
 }

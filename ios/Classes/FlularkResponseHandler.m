@@ -20,10 +20,10 @@
     return instance;
 }
 
-FlutterMethodChannel *fluwxMethodChannel = nil;
+FlutterMethodChannel *flularkMethodChannel = nil;
 
 - (void)setMethodChannel:(FlutterMethodChannel *)flutterMethodChannel {
-    fluwxMethodChannel = flutterMethodChannel;
+    flularkMethodChannel = flutterMethodChannel;
 }
 
 
