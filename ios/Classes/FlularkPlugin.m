@@ -17,7 +17,7 @@
 FlutterMethodChannel* channel = [FlutterMethodChannel
       methodChannelWithName:@"com.luckyaf/flulark"
             binaryMessenger:[registrar messenger]];
-  FlularkPlugin* instance = [[FluauthPlugin alloc] init];
+  FlularkPlugin* instance = [[FlularkPlugin alloc] init];
   [registrar addMethodCallDelegate:instance channel:channel];
           [[FlularkResponseHandler defaultManager] setMethodChannel:channel];
           [registrar addApplicationDelegate:instance];
