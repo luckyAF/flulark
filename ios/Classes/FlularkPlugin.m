@@ -45,9 +45,11 @@ FlutterMethodChannel *channel = nil;
 
     if ([@"flu_lark_register" isEqualToString:call.method]) {
         [self registerApp:call result:result];
-    } else if ([@"startLog" isEqualToString:call.method]) {
-         [self handleAuth:call result:result];
-    } 
+    } else if ([@"flu_lark_login" isEqualToString:call.method]) {
+        [self handleAuth:call result:result];
+    } else if ([@"getPlatformVersion" isEqualToString:call.method]) {
+        result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
+    }
 }
 
 
