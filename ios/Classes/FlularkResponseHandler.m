@@ -5,15 +5,8 @@
 @import LarkSSO;
 
 
-@interface FlularkResponseHandler ()<LarkSSODelegate>
-
-@end
-
 
 @implementation FlularkResponseHandler
-
-
-
 
 
 #pragma mark - LifeCycle

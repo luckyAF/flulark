@@ -1,13 +1,11 @@
 
 #import <Foundation/Foundation.h>
-
 #import <Flutter/Flutter.h>
+#import <LarkSSO/LarkSSO-Swift.h>
 
 
-// 处理飞书的回调
 
-
-@interface FlularkResponseHandler :NSObject
+@interface FlularkResponseHandler :NSObject<LarkSSODelegate>
 
 + (instancetype)defaultManager;
 
