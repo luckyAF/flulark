@@ -2,6 +2,8 @@
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html.
 # Run `pod lib lint flulark.podspec` to validate before publishing.
 #
+
+
 Pod::Spec.new do |s|
   s.name             = 'flulark'
   s.version          = '0.0.1'
@@ -15,7 +17,7 @@ flutter飞书登录
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'LarkSSO', '1.1.2'
+  s.dependency 'LarkSSO', '~> 1.1.2'
   s.platform = :ios, '9.0'
   s.swift_version = '5.7'
   s.static_framework = true

@@ -1,10 +1,19 @@
+
+#import <Flutter/Flutter.h>
+#import "FlularkResponseHandler.h"
+
+@import LarkSSO;
+
+
+@interface FlularkResponseHandler ()<LarkSSODelegate>
+
+@end
+
+
 @implementation FlularkResponseHandler
 
 
 
-#import <Flutter/Flutter.h>
-#import "FluwxStringUtil.h"
-#import "FlularkResponseHandler.h"
 
 
 #pragma mark - LifeCycle
@@ -23,6 +32,9 @@ FlutterMethodChannel *fluwxMethodChannel = nil;
 - (void)setMethodChannel:(FlutterMethodChannel *)flutterMethodChannel {
     fluwxMethodChannel = flutterMethodChannel;
 }
+
+
+bool useChallengeCode = YES;
 
 
 #pragma mark - LarkSSODelegate

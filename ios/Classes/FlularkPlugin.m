@@ -1,48 +1,52 @@
 #import "FlularkPlugin.h"
-#if __has_include(<flulark/flulark-Swift.h>)
-#import <flulark/flulark-Swift.h>
-#else
-// Support project import fallback if the generated compatibility header
-// is not copied when this plugin is created as a library.
-// https://forums.swift.org/t/swift-static-libraries-dont-copy-generated-objective-c-header/19816
-#import "flulark-Swift.h"
-#endif
 #import "FlularkStringUtil.h"
+#import "FlularkResponseHandler.h"
 
 @import LarkSSO;
 
 @interface FlularkPlugin()
+@property (strong,nonatomic)NSString *extMsg;
+@end
+
+
+
+@implementation FlularkPlugin;
 
 bool useChallengeCode = YES;
 /// channel
 FlutterMethodChannel *channel = nil;
 
-@implementation FlularkPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
   #if TARGET_OS_IPHONE
         if (channel == nil) {
 #endif
-        channel = [FlutterMethodChannel
-                methodChannelWithName:@"com.luckyaf/flulark"
+        channel = [FlutterMethodChannel methodChannelWithName:@"com.luckyaf/flulark"
                       binaryMessenger:[registrar messenger]];
-        FluwxPlugin *instance = [[FluwxPlugin alloc] initWithRegistrar:registrar methodChannel:channel];
+        FlularkPlugin *instance = [[FlularkPlugin alloc] initWithRegistrar:registrar methodChannel:channel];
         [registrar addMethodCallDelegate:instance channel:channel];
         [[FlularkResponseHandler defaultManager] setMethodChannel:channel];
-        
         [registrar addApplicationDelegate:instance];
 #if TARGET_OS_IPHONE
         }
+#endif
+
+}
+
+- (instancetype)initWithRegistrar:(NSObject <FlutterPluginRegistrar> *)registrar methodChannel:(FlutterMethodChannel *)flutterMethodChannel {
+    self = [super init];
+    if (self) {
+        channel = flutterMethodChannel;
+    }
+    return self;
 }
 
 
 - (void)handleMethodCall:(FlutterMethodCall *)call result:(FlutterResult)result {
-    _isRunning = YES;
-    
+
     if ([@"flu_lark_register" isEqualToString:call.method]) {
         [self registerApp:call result:result];
     } else if ([@"startLog" isEqualToString:call.method]) {
          [self handleAuth:call result:result];
-
     } 
 }
 
@@ -62,8 +66,8 @@ FlutterMethodChannel *channel = nil;
     }
     NSString *scheme = call.arguments[@"flu_lark_app_scheme"];
 
-    if ([FluwxStringUtil isBlank:scheme]) {
-        result([FlutterError errorWithCode:@"invalid app scheme" message:@"are you sure your app scheme is correct ? " details:universalLink]);
+    if ([FlularkStringUtil isBlank:scheme]) {
+        result([FlutterError errorWithCode:@"invalid app scheme" message:@"are you sure your app scheme is correct ? " details:scheme]);
         return;
     }
 
