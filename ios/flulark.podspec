@@ -17,7 +17,7 @@ flutter飞书登录
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'LarkSSO', '~> 1.1.2'
+  s.dependency 'LarkSSO', '~> 1.1.21'
   s.platform = :ios, '9.0'
   s.swift_version = '5.7'
   s.static_framework = true

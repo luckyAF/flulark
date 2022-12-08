@@ -2,8 +2,10 @@
 source 'https://github.com/volcengine/volcengine-specs.git'
 platform :ios, '9.0'
 
+ # 使用 cocoapods 默认源
+ source "https://github.com/CocoaPods/Specs.git"
 
-ssoVersion = '1.1.2'
+ ssoVersion = '1.1.2'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
@@ -34,6 +36,7 @@ flutter_ios_podfile_setup
 target 'Runner' do
   use_frameworks!
   use_modular_headers!
+  pod  "LarkSSO" ,ssoVersion
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end
 
