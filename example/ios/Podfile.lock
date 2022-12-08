@@ -1,0 +1,30 @@
+PODS:
+  - flulark (0.0.1):
+    - Flutter
+    - LarkSSO (= 1.1.2)
+  - Flutter (1.0.0)
+  - LarkSSO (1.1.2)
+
+DEPENDENCIES:
+  - flulark (from `.symlinks/plugins/flulark/ios`)
+  - Flutter (from `Flutter`)
+  - LarkSSO (= 1.1.2)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - LarkSSO
+
+EXTERNAL SOURCES:
+  flulark:
+    :path: ".symlinks/plugins/flulark/ios"
+  Flutter:
+    :path: Flutter
+
+SPEC CHECKSUMS:
+  flulark: 5f59128c58c9bb702d689259acd5b2908fc7925b
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  LarkSSO: 8f9960fb651fdc3ea0070c1497c0a75798045774
+
+PODFILE CHECKSUM: 12a247d0ef52b4583a1157a85e2a0579b28edd95
+
+COCOAPODS: 1.11.3
